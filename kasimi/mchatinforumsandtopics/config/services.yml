@@ -1,0 +1,10 @@
+services:
+    kasimi.mchatinforumsandtopics.listener:
+        class: kasimi\mchatinforumsandtopics\event\listener
+        arguments:
+            - '@user'
+            - '@template'
+            - '@?dmzx.mchat.core'
+            - '@?dmzx.mchat.settings'
+        tags:
+            - { name: event.listener }

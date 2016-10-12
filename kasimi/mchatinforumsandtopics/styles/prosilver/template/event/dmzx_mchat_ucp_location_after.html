@@ -1,0 +1,18 @@
+<!-- IF MCHAT_IN_VIEWFORUM_AUTH -->
+<dl>
+	<dt><label for="user_mchat_in_viewforum">{L_MCHAT_IN_VIEWFORUM}{L_COLON}</label></dt>
+	<dd>
+		<label><input type="radio" name="user_mchat_in_viewforum" value="1"<!-- IF MCHAT_IN_VIEWFORUM --> id="user_mchat_in_viewforum" checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+		<label><input type="radio" name="user_mchat_in_viewforum" value="0"<!-- IF not MCHAT_IN_VIEWFORUM --> id="user_mchat_in_viewforum" checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+	</dd>
+</dl>
+<!-- ENDIF -->
+<!-- IF MCHAT_IN_VIEWTOPIC_AUTH -->
+<dl>
+	<dt><label for="user_mchat_in_viewtopic">{L_MCHAT_IN_VIEWTOPIC}{L_COLON}</label></dt>
+	<dd>
+		<label><input type="radio" name="user_mchat_in_viewtopic" value="1"<!-- IF MCHAT_IN_VIEWTOPIC --> id="user_mchat_in_viewtopic" checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+		<label><input type="radio" name="user_mchat_in_viewtopic" value="0"<!-- IF not MCHAT_IN_VIEWTOPIC --> id="user_mchat_in_viewtopic" checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+	</dd>
+</dl>
+<!-- ENDIF -->

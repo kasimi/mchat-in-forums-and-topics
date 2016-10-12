@@ -1,0 +1,27 @@
+{
+	"name": "kasimi/mchatinforumsandtopics",
+	"type": "phpbb-extension",
+	"description": "Adds mChat to viewforum and viewtopic pages",
+	"homepage": "https://github.com/kasimi/phpbb-ext-mchatinforumsandtopics",
+	"version": "1.0.0",
+	"time": "2016-10-13",
+	"keywords": [],
+	"license": "GPL-2.0",
+	"authors": [
+		{
+			"name": "kasimi",
+			"homepage": "https://kasimi.net",
+			"role": "Extension Developer"
+		}
+	],
+	"require": {
+		"php": ">=5.3.3",
+		"phpbb/phpbb": ">=3.1.8-RC1,<3.3.0@dev"
+	},
+	"extra": {
+		"display-name": "mChat in Forums and Topics Addon",
+		"soft-require": {
+			"phpbb/phpbb": ">=3.1.8-RC1,<3.3.0@dev"
+		}
+	}
+}
