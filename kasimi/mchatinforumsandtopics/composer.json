@@ -22,6 +22,12 @@
 		"display-name": "mChat in Forums and Topics Addon",
 		"soft-require": {
 			"phpbb/phpbb": ">=3.1.8-RC1,<3.3.0@dev"
+		},
+		"version-check": {
+			"host": "kasimi.github.io",
+			"directory": "/phpbb-ext-mchatinforumsandtopics",
+			"filename": "version.json",
+			"ssl": true
 		}
 	}
 }
