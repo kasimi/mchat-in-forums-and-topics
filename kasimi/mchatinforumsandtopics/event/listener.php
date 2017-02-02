@@ -12,6 +12,7 @@ namespace kasimi\mchatinforumsandtopics\event;
 
 use dmzx\mchat\core\mchat;
 use dmzx\mchat\core\settings;
+use phpbb\auth\auth;
 use phpbb\template\template;
 use phpbb\user;
 use Symfony\Component\EventDispatcher\Event;
@@ -22,6 +23,9 @@ class listener implements EventSubscriberInterface
 	/** @var user */
 	protected $user;
 
+	/** @var auth */
+	protected $auth;
+
 	/** @var template */
 	protected $template;
 
@@ -31,22 +35,31 @@ class listener implements EventSubscriberInterface
 	/** @var settings */
 	protected $settings;
 
+	/** @var string */
+	protected $form_name = '';
+
+	/** @var bool */
+	protected $custom_form_token = false;
+
 	/**
 	 * Constructor
 	 *
 	 * @param user		$user
+	 * @param auth		$auth
 	 * @param template	$template
 	 * @param mchat		$mchat
 	 * @param settings	$settings
 	 */
 	public function __construct(
 		user $user,
+		auth $auth,
 		template $template,
 		mchat $mchat = null,
 		settings $settings = null
 	)
 	{
 		$this->user		= $user;
+		$this->auth		= $auth;
 		$this->template	= $template;
 		$this->mchat	= $mchat;
 		$this->settings	= $settings;
@@ -62,6 +75,7 @@ class listener implements EventSubscriberInterface
 			'dmzx.mchat.ucp_settings_modify'							=> 'ucp_settings_modify',
 
 			// Display on viewforum and viewtopic
+			'core.add_form_key'											=> 'add_form_key',
 			'core.viewforum_modify_topics_data'							=> 'viewforum',
 			'core.viewtopic_modify_page_title'							=> 'viewtopic',
 
@@ -74,17 +88,31 @@ class listener implements EventSubscriberInterface
 	}
 
 	/**
-	 * @param object $event
+	 * @param Event $event
 	 */
-	public function viewforum($event)
+	public function add_form_key($event)
+	{
+		$this->form_name = $event['form_name'];
+		$this->custom_form_token = isset($event['template_variable_suffix']);
+
+		if ($this->custom_form_token && $this->form_name === 'mchat')
+		{
+			$event['template_variable_suffix'] = '_DMZX_MCHAT';
+		}
+	}
+
+	/**
+	 *
+	 */
+	public function viewforum()
 	{
 		$this->add_mchat('viewforum');
 	}
 
 	/**
-	 * @param object $event
+	 *
 	 */
-	public function viewtopic($event)
+	public function viewtopic()
 	{
 		$this->add_mchat('viewtopic');
 	}
@@ -94,28 +122,41 @@ class listener implements EventSubscriberInterface
 	 */
 	protected function add_mchat($mode)
 	{
-		if ($this->mchat !== null && $this->settings !== null && $this->settings->cfg('mchat_in_' . $mode))
+		// Abort if another form is already present (when composing a PM, changing UCP settings etc)
+		if (!$this->custom_form_token && $this->form_name !== '' && $this->form_name !== 'mchat')
 		{
-			// We use the page_index() method later to render mChat
-			// so we need to enable mChat on the index page only for this request
-			$this->user->data['user_mchat_index'] = 1;
-			$this->settings->set_cfg('mchat_index', 1, true);
-
-			// Render mChat
-			$this->mchat->page_index();
-
-			// Amend some template data
-			$this->template->assign_vars(array(
-				'MCHAT_PAGE'			=> $mode,
-				'MCHAT_INDEX_HEIGHT'	=> 200,
-			));
+			return;
 		}
+
+		if ($this->mchat === null || $this->settings === null)
+		{
+			return;
+		}
+
+		if (!$this->auth->acl_get('u_mchat_view') || !$this->settings->cfg('mchat_in_' . $mode))
+		{
+			return;
+		}
+
+		// We use the page_index() method later to render mChat
+		// so we need to enable mChat on the index page only for this request
+		$this->user->data['user_mchat_index'] = 1;
+		$this->settings->set_cfg('mchat_index', 1, true);
+
+		// Render mChat
+		$this->mchat->page_index();
+
+		// Amend some template data
+		$this->template->assign_vars(array(
+			'MCHAT_PAGE'			=> $mode,
+			'MCHAT_INDEX_HEIGHT'	=> 200,
+		));
 	}
 
 	/**
-	 * @param Event $event
+	 *
 	 */
-	public function acp_add_lang($event)
+	public function acp_add_lang()
 	{
 		if ($this->mchat !== null && $this->settings !== null)
 		{
@@ -124,7 +165,7 @@ class listener implements EventSubscriberInterface
 	}
 
 	/**
-	 * @param object $event
+	 * @param Event $event
 	 */
 	public function ucp_settings_modify($event)
 	{
