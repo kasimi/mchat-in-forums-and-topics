@@ -1,7 +1,7 @@
 {
 	"stable": {
 		"1.0": {
-			"current": "1.0.1",
+			"current": "1.0.2",
 			"download": "https://kasimi.net",
 			"announcement": "https://kasimi.net",
 			"eol": null,
@@ -10,7 +10,7 @@
 	},
 	"unstable": {
 		"1.0": {
-			"current": "1.0.1",
+			"current": "1.0.2",
 			"download": "https://kasimi.net",
 			"announcement": "https://kasimi.net",
 			"eol": null,
