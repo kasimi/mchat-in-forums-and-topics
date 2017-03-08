@@ -92,6 +92,11 @@ class listener implements EventSubscriberInterface
 	 */
 	public function add_form_key($event)
 	{
+		if ($this->mchat === null || $this->settings === null)
+		{
+			return;
+		}
+
 		$this->form_name = $event['form_name'];
 		$this->custom_form_token = isset($event['template_variable_suffix']);
 
@@ -122,13 +127,13 @@ class listener implements EventSubscriberInterface
 	 */
 	protected function add_mchat($mode)
 	{
-		// Abort if another form is already present (when composing a PM, changing UCP settings etc)
-		if (!$this->custom_form_token && $this->form_name !== '' && $this->form_name !== 'mchat')
+		if ($this->mchat === null || $this->settings === null)
 		{
 			return;
 		}
 
-		if ($this->mchat === null || $this->settings === null)
+		// Abort if another form is already present (when composing a PM, changing UCP settings etc)
+		if (!$this->custom_form_token && $this->form_name !== '' && $this->form_name !== 'mchat')
 		{
 			return;
 		}
@@ -180,6 +185,11 @@ class listener implements EventSubscriberInterface
 	 */
 	public function permissions($event)
 	{
+		if ($this->mchat === null || $this->settings === null)
+		{
+			return;
+		}
+
 		$category = 'mchat_user_config';
 
 		$new_permissions = array(
