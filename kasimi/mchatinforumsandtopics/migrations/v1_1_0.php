@@ -25,16 +25,40 @@ class v1_1_0 extends container_aware_migration
 	{
 		$incorrect_migration_name = 'kasimi\mchatinforumsandtopics\migrations\v1_0_0';
 
-		$sql = 'UPDATE ' . MIGRATIONS_TABLE . "	
-			SET migration_name = '" . $this->db->sql_escape('\\' . $incorrect_migration_name) . "'
-			WHERE migration_name = '" . $this->db->sql_escape($incorrect_migration_name) . "'";
-		$this->db->sql_query($sql);
-
-		if ($this->db->sql_affectedrows())
+		if ($this->exists_migration_name($incorrect_migration_name))
 		{
+			if ($this->exists_migration_name('\\' . $incorrect_migration_name))
+			{
+				$sql = 'DELETE FROM ' . MIGRATIONS_TABLE . "	
+					WHERE migration_name = '" . $this->db->sql_escape($incorrect_migration_name) . "'";
+				$this->db->sql_query($sql);
+			}
+			else
+			{
+				$sql = 'UPDATE ' . MIGRATIONS_TABLE . "	
+					SET migration_name = '" . $this->db->sql_escape('\\' . $incorrect_migration_name) . "'
+					WHERE migration_name = '" . $this->db->sql_escape($incorrect_migration_name) . "'";
+				$this->db->sql_query($sql);
+			}
+
 			$user = $this->container->get('user');
 			$user->add_lang_ext('kasimi/mchatinforumsandtopics', 'mchatinforumsandtopics_ucp');
 			trigger_error('MCHAT_IN_FORUMS_AND_TOPICS_FIXED_MIGRATION_NAME');
 		}
+	}
+
+	/**
+	 * @param string $migration_name
+	 * @return bool
+	 */
+	protected function exists_migration_name($migration_name)
+	{
+		$sql = 'SELECT migration_name 
+			FROM ' . MIGRATIONS_TABLE . "	
+			WHERE migration_name = '" . $this->db->sql_escape($migration_name) . "'";
+		$result = $this->db->sql_query($sql);
+		$row = $this->db->sql_fetchrow($result);
+		$this->db->sql_freeresult($result);
+		return isset($row['migration_name']);
 	}
 }
