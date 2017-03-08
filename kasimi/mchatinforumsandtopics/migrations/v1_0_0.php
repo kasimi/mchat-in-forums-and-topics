@@ -10,15 +10,10 @@
 
 namespace kasimi\mchatinforumsandtopics\migrations;
 
-use phpbb\db\migration\container_aware_migration;
+use phpbb\db\migration\migration;
 
-class v1_0_0 extends container_aware_migration
+class v1_0_0 extends migration
 {
-	static public function depends_on()
-	{
-		return array('\dmzx\mchat\migrations\mchat_2_0_0_rc7');
-	}
-
 	public function update_data()
 	{
 		return array(
