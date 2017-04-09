@@ -77,7 +77,6 @@ class listener implements EventSubscriberInterface
 			// Inject our settings
 			'dmzx.mchat.ucp_settings_modify'							=> 'ucp_settings_modify',
 
-
 			// Display on viewforum and viewtopic
 			'core.add_form_key'											=> 'add_form_key',
 			'dmzx.mchat.render_page_pagination_before'					=> 'is_archive_page',
