@@ -41,6 +41,9 @@ class listener implements EventSubscriberInterface
 	/** @var bool */
 	protected $custom_form_token = false;
 
+	/** @var bool */
+	protected $is_archive_page = false;
+
 	/**
 	 * Constructor
 	 *
@@ -74,8 +77,10 @@ class listener implements EventSubscriberInterface
 			// Inject our settings
 			'dmzx.mchat.ucp_settings_modify'							=> 'ucp_settings_modify',
 
+
 			// Display on viewforum and viewtopic
 			'core.add_form_key'											=> 'add_form_key',
+			'dmzx.mchat.render_page_pagination_before'					=> 'is_archive_page',
 			'core.viewforum_modify_topics_data'							=> 'viewforum',
 			'core.viewtopic_modify_page_title'							=> 'viewtopic',
 
@@ -85,6 +90,14 @@ class listener implements EventSubscriberInterface
 			'dmzx.mchat.acp_globalusersettings_modify_template_data'	=> array('acp_add_lang', 10),
 			'dmzx.mchat.ucp_modify_template_data'						=> array('acp_add_lang', 10),
 		);
+	}
+
+	/**
+	 *
+	 */
+	public function is_archive_page()
+	{
+		$this->is_archive_page = true;
 	}
 
 	/**
@@ -100,7 +113,7 @@ class listener implements EventSubscriberInterface
 		$this->form_name = $event['form_name'];
 		$this->custom_form_token = isset($event['template_variable_suffix']);
 
-		if ($this->custom_form_token && $this->form_name === 'mchat')
+		if ($this->custom_form_token && $this->form_name === 'mchat' && !$this->is_archive_page)
 		{
 			$event['template_variable_suffix'] = '_DMZX_MCHAT';
 		}
