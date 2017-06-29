@@ -1,6 +1,6 @@
 {% if MCHAT_IN_VIEWFORUM_AUTH %}
 <dl>
-	<dt><label for="user_mchat_in_viewforum">{{ lang('MCHAT_IN_VIEWFORUM') }}{{ lang('COLON') }}</label></dt>
+	<dt><label for="user_mchat_in_viewforum">{{ lang('MCHAT_IN_VIEWFORUM') ~ lang('COLON') }}</label></dt>
 	<dd>
 		<label><input type="radio" name="user_mchat_in_viewforum" value="1"{% if MCHAT_IN_VIEWFORUM %} id="user_mchat_in_viewforum" checked="checked"{% endif %} /> {{ lang('YES') }}</label>
 		<label><input type="radio" name="user_mchat_in_viewforum" value="0"{% if not MCHAT_IN_VIEWFORUM %} id="user_mchat_in_viewforum" checked="checked"{% endif %} /> {{ lang('NO') }}</label>
@@ -9,7 +9,7 @@
 {% endif %}
 {% if MCHAT_IN_VIEWTOPIC_AUTH %}
 <dl>
-	<dt><label for="user_mchat_in_viewtopic">{{ lang('MCHAT_IN_VIEWTOPIC') }}{{ lang('COLON') }}</label></dt>
+	<dt><label for="user_mchat_in_viewtopic">{{ lang('MCHAT_IN_VIEWTOPIC') ~ lang('COLON') }}</label></dt>
 	<dd>
 		<label><input type="radio" name="user_mchat_in_viewtopic" value="1"{% if MCHAT_IN_VIEWTOPIC %} id="user_mchat_in_viewtopic" checked="checked"{% endif %} /> {{ lang('YES') }}</label>
 		<label><input type="radio" name="user_mchat_in_viewtopic" value="0"{% if not MCHAT_IN_VIEWTOPIC %} id="user_mchat_in_viewtopic" checked="checked"{% endif %} /> {{ lang('NO') }}</label>
