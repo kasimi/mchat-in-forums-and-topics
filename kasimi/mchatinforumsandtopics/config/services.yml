@@ -3,6 +3,7 @@ services:
         class: kasimi\mchatinforumsandtopics\event\listener
         arguments:
             - '@user'
+            - '@language'
             - '@auth'
             - '@template'
             - '@?dmzx.mchat.core'

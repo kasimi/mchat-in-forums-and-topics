@@ -13,15 +13,19 @@ namespace kasimi\mchatinforumsandtopics\event;
 use dmzx\mchat\core\mchat;
 use dmzx\mchat\core\settings;
 use phpbb\auth\auth;
+use phpbb\event\data;
+use phpbb\language\language;
 use phpbb\template\template;
 use phpbb\user;
-use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class listener implements EventSubscriberInterface
 {
 	/** @var user */
 	protected $user;
+
+	/** @var language */
+	protected $lang;
 
 	/** @var auth */
 	protected $auth;
@@ -35,19 +39,9 @@ class listener implements EventSubscriberInterface
 	/** @var settings */
 	protected $settings;
 
-	/** @var string */
-	protected $form_name = '';
-
-	/** @var bool */
-	protected $custom_form_token = false;
-
-	/** @var bool */
-	protected $is_archive_page = false;
-
 	/**
-	 * Constructor
-	 *
 	 * @param user		$user
+	 * @param language	lang
 	 * @param auth		$auth
 	 * @param template	$template
 	 * @param mchat		$mchat
@@ -55,6 +49,7 @@ class listener implements EventSubscriberInterface
 	 */
 	public function __construct(
 		user $user,
+		language $lang,
 		auth $auth,
 		template $template,
 		mchat $mchat = null,
@@ -62,6 +57,7 @@ class listener implements EventSubscriberInterface
 	)
 	{
 		$this->user		= $user;
+		$this->lang		= $lang;
 		$this->auth		= $auth;
 		$this->template	= $template;
 		$this->mchat	= $mchat;
@@ -177,12 +173,12 @@ class listener implements EventSubscriberInterface
 	{
 		if ($this->mchat !== null && $this->settings !== null)
 		{
-			$this->user->add_lang_ext('kasimi/mchatinforumsandtopics', array('mchatinforumsandtopics_ucp'));
+			$this->lang->add_lang('mchatinforumsandtopics_ucp', 'kasimi/mchatinforumsandtopics');
 		}
 	}
 
 	/**
-	 * @param Event $event
+	 * @param data $event
 	 */
 	public function ucp_settings_modify($event)
 	{
@@ -193,7 +189,7 @@ class listener implements EventSubscriberInterface
 	}
 
 	/**
-	 * @param Event $event
+	 * @param data $event
 	 */
 	public function permissions($event)
 	{

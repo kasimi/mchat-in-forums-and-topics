@@ -11,6 +11,7 @@
 namespace kasimi\mchatinforumsandtopics\migrations;
 
 use phpbb\db\migration\container_aware_migration;
+use phpbb\language\language;
 
 class v1_1_0 extends container_aware_migration
 {
@@ -41,8 +42,9 @@ class v1_1_0 extends container_aware_migration
 				$this->db->sql_query($sql);
 			}
 
-			$user = $this->container->get('user');
-			$user->add_lang_ext('kasimi/mchatinforumsandtopics', 'mchatinforumsandtopics_ucp');
+			/** @var language $lang */
+			$lang = $this->container->get('language');
+			$lang->add_lang('mchatinforumsandtopics_ucp', 'kasimi/mchatinforumsandtopics');
 			trigger_error('MCHAT_IN_FORUMS_AND_TOPICS_FIXED_MIGRATION_NAME');
 		}
 	}
