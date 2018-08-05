@@ -3,10 +3,10 @@
 	"type": "phpbb-extension",
 	"description": "Adds mChat to viewforum and viewtopic pages",
 	"homepage": "https://github.com/kasimi/phpbb-ext-mchatinforumsandtopics",
-	"version": "1.1.2",
-	"time": "2017-08-04",
+	"version": "1.2.0",
+	"time": "2018-08-05",
 	"keywords": [],
-	"license": "GPL-2.0",
+	"license": "GPL-2.0-only",
 	"authors": [
 		{
 			"name": "kasimi",
