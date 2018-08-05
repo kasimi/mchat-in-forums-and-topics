@@ -106,12 +106,7 @@ class listener implements EventSubscriberInterface
 	 */
 	protected function add_mchat($mode)
 	{
-		if ($this->mchat === null || $this->settings === null)
-		{
-			return;
-		}
-
-		if (!$this->auth->acl_get('u_mchat_view') || !$this->settings->cfg('mchat_in_' . $mode))
+		if (!$this->is_mchat_enabled() || !$this->auth->acl_get('u_mchat_view') || !$this->settings->cfg('mchat_in_' . $mode))
 		{
 			return;
 		}
@@ -136,7 +131,7 @@ class listener implements EventSubscriberInterface
 	 */
 	public function acp_add_lang()
 	{
-		if ($this->mchat !== null && $this->settings !== null)
+		if ($this->is_mchat_enabled())
 		{
 			$this->lang->add_lang('mchatinforumsandtopics_ucp', 'kasimi/mchatinforumsandtopics');
 		}
@@ -158,7 +153,7 @@ class listener implements EventSubscriberInterface
 	 */
 	public function permissions($event)
 	{
-		if ($this->mchat === null || $this->settings === null)
+		if (!$this->is_mchat_enabled())
 		{
 			return;
 		}
@@ -186,5 +181,13 @@ class listener implements EventSubscriberInterface
 
 			$event['permissions'] = $permissions;
 		}
+	}
+
+	/**
+	 * @return bool
+	 */
+	protected function is_mchat_enabled()
+	{
+		return $this->mchat !== null && $this->settings !== null;
 	}
 }
