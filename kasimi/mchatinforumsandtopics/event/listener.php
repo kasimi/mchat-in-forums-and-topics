@@ -122,7 +122,7 @@ class listener implements EventSubscriberInterface
 		// Amend some template data
 		$this->template->assign_vars([
 			'MCHAT_PAGE'			=> $mode,
-			'MCHAT_INDEX_HEIGHT'	=> 200,
+			'MCHAT_INDEX_HEIGHT'	=> (int) $this->settings->cfg('mchat_index_height'),
 		]);
 	}
 
