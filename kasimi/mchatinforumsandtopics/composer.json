@@ -16,12 +16,12 @@
 		}
 	],
 	"require": {
-		"php": ">=5.3.3"
+		"php": ">=5.4.7"
 	},
 	"extra": {
 		"display-name": "mChat in Forums and Topics Addon",
 		"soft-require": {
-			"phpbb/phpbb": ">=3.1.8-RC1"
+			"phpbb/phpbb": ">=3.2.0"
 		},
 		"version-check": {
 			"host": "kasimi.github.io",
