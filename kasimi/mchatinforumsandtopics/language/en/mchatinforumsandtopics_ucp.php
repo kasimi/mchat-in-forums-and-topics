@@ -15,7 +15,7 @@ if (!defined('IN_PHPBB'))
 
 if (empty($lang) || !is_array($lang))
 {
-	$lang = array();
+	$lang = [];
 }
 
 // DEVELOPERS PLEASE NOTE
@@ -33,8 +33,8 @@ if (empty($lang) || !is_array($lang))
 // Some characters for use
 // ’ » “ ” …
 
-$lang = array_merge($lang, array(
+$lang = array_merge($lang, [
 	'MCHAT_IN_VIEWFORUM'								=> 'Display mChat when viewing forums',
 	'MCHAT_IN_VIEWTOPIC'								=> 'Display mChat when viewing topics',
 	'MCHAT_IN_FORUMS_AND_TOPICS_FIXED_MIGRATION_NAME'	=> 'An incorrect migration name has been found and fixed. Please enable the extension once again.',
-));
+]);

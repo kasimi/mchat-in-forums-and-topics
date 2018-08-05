@@ -16,9 +16,9 @@ class v1_0_1 extends migration
 {
 	public function update_data()
 	{
-		return array(
-			array('config.add', array('mchat_in_viewforum', 0)),
-			array('config.add', array('mchat_in_viewtopic', 0)),
-		);
+		return [
+			['config.add', ['mchat_in_viewforum', 0]],
+			['config.add', ['mchat_in_viewtopic', 0]],
+		];
 	}
 }

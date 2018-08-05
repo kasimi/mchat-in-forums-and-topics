@@ -16,33 +16,33 @@ class v1_0_0 extends migration
 {
 	public function update_data()
 	{
-		return array(
-			array('permission.add', array('u_mchat_in_viewforum', true)),
-			array('permission.add', array('u_mchat_in_viewtopic', true)),
-		);
+		return [
+			['permission.add', ['u_mchat_in_viewforum', true]],
+			['permission.add', ['u_mchat_in_viewtopic', true]],
+		];
 	}
 
 	public function update_schema()
 	{
-		return array(
-			'add_columns' => array(
-				$this->table_prefix . 'users' => array(
-					'user_mchat_in_viewforum'	=> array('BOOL', 1),
-					'user_mchat_in_viewtopic'	=> array('BOOL', 1),
-				),
-			),
-		);
+		return [
+			'add_columns' => [
+				$this->table_prefix . 'users' => [
+					'user_mchat_in_viewforum'	=> ['BOOL', 1],
+					'user_mchat_in_viewtopic'	=> ['BOOL', 1],
+				],
+			],
+		];
 	}
 
 	public function revert_schema()
 	{
-		return array(
-			'drop_columns' => array(
-				$this->table_prefix . 'users' => array(
+		return [
+			'drop_columns' => [
+				$this->table_prefix . 'users' => [
 					'user_mchat_in_viewforum',
 					'user_mchat_in_viewtopic',
-				),
-			),
-		);
+				],
+			],
+		];
 	}
 }

@@ -16,17 +16,17 @@ class v1_1_2 extends migration
 {
 	static public function depends_on()
 	{
-		return array(
+		return [
 			'\kasimi\mchatinforumsandtopics\migrations\v1_0_1',
 			'\kasimi\mchatinforumsandtopics\migrations\v1_1_0',
-		);
+		];
 	}
 
 	public function update_data()
 	{
-		return array(
-			array('custom', array(array($this, 'fix_migration_depends_on'))),
-		);
+		return [
+			['custom', [[$this, 'fix_migration_depends_on']]],
+		];
 	}
 
 	public function fix_migration_depends_on()

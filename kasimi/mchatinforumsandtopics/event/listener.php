@@ -73,7 +73,7 @@ class listener implements EventSubscriberInterface
 	 */
 	static public function getSubscribedEvents()
 	{
-		return array(
+		return [
 			// Inject our settings
 			'dmzx.mchat.ucp_settings_modify'							=> 'ucp_settings_modify',
 
@@ -84,11 +84,11 @@ class listener implements EventSubscriberInterface
 			'core.viewtopic_modify_page_title'							=> 'viewtopic',
 
 			// UCP and ACP settings
-			'core.permissions'											=> array('permissions', -10),
-			'core.acp_users_prefs_modify_template_data'					=> array('acp_add_lang', 10),
-			'dmzx.mchat.acp_globalusersettings_modify_template_data'	=> array('acp_add_lang', 10),
-			'dmzx.mchat.ucp_modify_template_data'						=> array('acp_add_lang', 10),
-		);
+			'core.permissions'											=> ['permissions', -10],
+			'core.acp_users_prefs_modify_template_data'					=> ['acp_add_lang', 10],
+			'dmzx.mchat.acp_globalusersettings_modify_template_data'	=> ['acp_add_lang', 10],
+			'dmzx.mchat.ucp_modify_template_data'						=> ['acp_add_lang', 10],
+		];
 	}
 
 	/**
@@ -164,10 +164,10 @@ class listener implements EventSubscriberInterface
 		$this->mchat->page_index();
 
 		// Amend some template data
-		$this->template->assign_vars(array(
+		$this->template->assign_vars([
 			'MCHAT_PAGE'			=> $mode,
 			'MCHAT_INDEX_HEIGHT'	=> 200,
-		));
+		]);
 	}
 
 	/**
@@ -186,10 +186,10 @@ class listener implements EventSubscriberInterface
 	 */
 	public function ucp_settings_modify($event)
 	{
-		$event['ucp_settings'] = array_merge($event['ucp_settings'], array(
-			'mchat_in_viewforum' => array('default' => 0),
-			'mchat_in_viewtopic' => array('default' => 0),
-		));
+		$event['ucp_settings'] = array_merge($event['ucp_settings'], [
+			'mchat_in_viewforum' => ['default' => 0],
+			'mchat_in_viewtopic' => ['default' => 0],
+		]);
 	}
 
 	/**
@@ -204,10 +204,10 @@ class listener implements EventSubscriberInterface
 
 		$category = 'mchat_user_config';
 
-		$new_permissions = array(
+		$new_permissions = [
 			'u_mchat_in_viewforum',
 			'u_mchat_in_viewtopic',
-		);
+		];
 
 		$categories = $event['categories'];
 
@@ -217,10 +217,10 @@ class listener implements EventSubscriberInterface
 
 			foreach ($new_permissions as $new_permission)
 			{
-				$permissions[$new_permission] = array(
+				$permissions[$new_permission] = [
 					'lang' => 'ACL_' . strtoupper($new_permission),
 					'cat' => $category,
-				);
+				];
 			}
 
 			$event['permissions'] = $permissions;

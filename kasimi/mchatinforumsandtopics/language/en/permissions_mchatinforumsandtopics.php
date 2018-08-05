@@ -15,7 +15,7 @@ if (!defined('IN_PHPBB'))
 
 if (empty($lang) || !is_array($lang))
 {
-	$lang = array();
+	$lang = [];
 }
 
 // DEVELOPERS PLEASE NOTE
@@ -33,7 +33,7 @@ if (empty($lang) || !is_array($lang))
 // Some characters for use
 // ’ » “ ” …
 
-$lang = array_merge($lang, array(
+$lang = array_merge($lang, [
 	'ACL_U_MCHAT_IN_VIEWFORUM'	=> 'Can customise <em>Display mChat when viewing forums</em>',
 	'ACL_U_MCHAT_IN_VIEWTOPIC'	=> 'Can customise <em>Display mChat when viewing topics</em>',
-));
+]);

@@ -16,9 +16,9 @@ class v1_1_0 extends container_aware_migration
 {
 	public function update_data()
 	{
-		return array(
-			array('custom', array(array($this, 'fix_migration_name'))),
-		);
+		return [
+			['custom', [[$this, 'fix_migration_name']]],
+		];
 	}
 
 	public function fix_migration_name()
