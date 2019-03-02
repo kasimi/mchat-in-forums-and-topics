@@ -1,6 +1,6 @@
 services:
     kasimi.mchatinforumsandtopics.listener:
-        class: kasimi\mchatinforumsandtopics\event\listener
+        class: 'kasimi\mchatinforumsandtopics\event\listener'
         arguments:
             - '@user'
             - '@language'
@@ -9,4 +9,4 @@ services:
             - '@?dmzx.mchat.core'
             - '@?dmzx.mchat.settings'
         tags:
-            - { name: event.listener }
+            - { name: 'event.listener' }
