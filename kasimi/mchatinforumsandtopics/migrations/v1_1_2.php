@@ -42,7 +42,7 @@ class v1_1_2 extends migration
 
 		$migration_depends_on = unserialize($row['migration_depends_on']);
 
-		if ($migration_depends_on[0] === 'kasimi\mchatinforumsandtopics\migrations\v1_0_0')
+		if (isset($migration_depends_on[0]) && $migration_depends_on[0] === 'kasimi\mchatinforumsandtopics\migrations\v1_0_0')
 		{
 			$migration_depends_on[0] = '\kasimi\mchatinforumsandtopics\migrations\v1_0_0';
 
