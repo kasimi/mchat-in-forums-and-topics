@@ -41,7 +41,7 @@ class listener implements EventSubscriberInterface
 
 	/**
 	 * @param user		$user
-	 * @param language	lang
+	 * @param language	$lang
 	 * @param auth		$auth
 	 * @param template	$template
 	 * @param mchat		$mchat
